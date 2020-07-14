@@ -55,10 +55,10 @@ class Objects():
                 Objects.Player.Jumping = True
             Objects.Player.Sprite.y += Objects.Player.Gravity
 
-        if collision.rectangle(obj1x,obj1y ,obj2x-1,obj2y+5 ,obj1w,obj1h ,obj2w+2,obj2h-5):
+        if collision.rectangle(obj1x,obj1y ,obj2x-0.1,obj2y ,obj1w,obj1h ,obj2w+0.2,obj2h):
             if Objects.Player.Direction == 'left': Objects.Player.Sprite.x += 4
             if Objects.Player.Direction == 'right': Objects.Player.Sprite.x -= 4
-        if collision.rectangle(obj1x,obj1y ,obj2x,obj2y ,obj1w,obj1h ,obj2w,obj2h-31):
+        if collision.rectangle(obj1x,obj1y ,obj2x+2,obj2y ,obj1w,obj1h+0.1 ,obj2w-5,obj2h-31):
             Objects.Player.Sprite.y -= Objects.Player.Gravity
             Objects.Player.Jumping = False
 
