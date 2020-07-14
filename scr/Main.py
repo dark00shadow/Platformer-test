@@ -45,7 +45,7 @@ class Objects():
         Sprite7 = pyglet.sprite.Sprite(Image, x=292,y=100, batch=ObjectBatch)
         Sprite8 = pyglet.sprite.Sprite(Image, x=324,y=100, batch=ObjectBatch)
         Sprite9 = pyglet.sprite.Sprite(Image, x=238,y=132, batch=ObjectBatch)
-        Sprite10 = pyglet.sprite.Sprite(Image, x=196,y=198, batch=ObjectBatch)
+        Sprite10 = pyglet.sprite.Sprite(Image, x=160,y=198, batch=ObjectBatch)
 
     # Block1Solid
     def Block1Solid(obj1x,obj1y,obj2x,obj2y,obj1w,obj1h,obj2w,obj2h):
