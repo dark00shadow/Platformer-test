@@ -44,7 +44,7 @@ class Objects():
         Sprite6 = pyglet.sprite.Sprite(Image, x=260,y=100, batch=ObjectBatch)
         Sprite7 = pyglet.sprite.Sprite(Image, x=292,y=100, batch=ObjectBatch)
         Sprite8 = pyglet.sprite.Sprite(Image, x=324,y=100, batch=ObjectBatch)
-        Sprite9 = pyglet.sprite.Sprite(Image, x=238,y=132, batch=ObjectBatch)
+        Sprite9 = pyglet.sprite.Sprite(Image, x=240,y=132, batch=ObjectBatch)
         Sprite10 = pyglet.sprite.Sprite(Image, x=160,y=198, batch=ObjectBatch)
 
     # Block1Solid
@@ -55,7 +55,7 @@ class Objects():
                 Objects.Player.Jumping = True
             Objects.Player.Sprite.y += Objects.Player.Gravity
 
-        if collision.rectangle(obj1x,obj1y ,obj2x-0.1,obj2y ,obj1w,obj1h ,obj2w+0.2,obj2h):
+        if collision.rectangle(obj1x,obj1y ,obj2x-1,obj2y ,obj1w,obj1h ,obj2w+2,obj2h):
             if Objects.Player.Direction == 'left': Objects.Player.Sprite.x += 4
             if Objects.Player.Direction == 'right': Objects.Player.Sprite.x -= 4
         if collision.rectangle(obj1x,obj1y ,obj2x+2,obj2y ,obj1w,obj1h+0.1 ,obj2w-5,obj2h-31):
