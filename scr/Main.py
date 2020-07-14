@@ -49,7 +49,7 @@ class Objects():
 
     # Block1Solid
     def Block1Solid(obj1x,obj1y,obj2x,obj2y,obj1w,obj1h,obj2w,obj2h):
-        if collision.rectangle(obj1x,obj1y-0.1 ,obj2x,obj2y ,obj1w,obj1h ,obj2w,obj2h):
+        if collision.rectangle(obj1x,obj1y-2 ,obj2x,obj2y ,obj1w,obj1h ,obj2w,obj2h):
             if KeyHandler[key.W]:
                 Objects.Player.OldPosY = Objects.Player.Sprite.y
                 Objects.Player.Jumping = True
