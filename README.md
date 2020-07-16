@@ -1,13 +1,21 @@
 # Platformer test game
 
+# Installation
+
+For windows, go to https://github.com/dark00shadow/Platformer-test/releases/tag/V1 then click 'Windows.zip' then when its downloaded, extract it 
+
+For Linux, go to https://github.com/dark00shadow/Platformer-test/releases/tag/V1 then click 'Linux.tar.gz' then when its downloaded, extract it 
 # Play
-for windows to run, run the `Main.exe` or for linux to run, run the `Main`
 
-Controls:
+For windows to run, run the `Main.exe`
 
- a = left
+For linux to run, run the `Main`
 
- d = right
+# Controls
 
- w = jump
+ A = Left
+
+ D = Right
+
+ W = Jump
 
