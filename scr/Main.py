@@ -15,91 +15,59 @@ Window.push_handlers(KeyHandler)
 ObjectBatch = pyglet.graphics.Batch()
 
 # Objects
-class Objects():
-    # Player
-    class Player():
-        # Gravity
-        Gravity = 2
-        # Jumping
-        Jumping = False
-        # Old position Y
-        OldPosY = 0
-        # Image
-        Image = pyglet.image.load('32x32-dark_green.png')
-        # Sprite
-        Sprite = pyglet.sprite.Sprite(Image, x=100,y=300, batch=ObjectBatch)
-        # Direction
-        Direction = ''
-    # Block1
-    class Block1():
-        # Images
-        Image = pyglet.image.load('32x32-white.png')
+Player = pyglet.sprite.Sprite(pyglet.image.load('32x32-dark_green.png') ,x=100,y=200, batch=ObjectBatch)
+PlayerOldPosX = 0
+Block1 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=100,y=100, batch=ObjectBatch)
+Block2 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=132,y=100, batch=ObjectBatch)
+Block3 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=164,y=100, batch=ObjectBatch)
+Block4 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=196,y=100, batch=ObjectBatch)
+Block5 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=168,y=196, batch=ObjectBatch)
+Block6 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=228,y=100, batch=ObjectBatch)
+Block7 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=260,y=100, batch=ObjectBatch)
+Block8 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=260,y=132, batch=ObjectBatch)
 
-        # Sprites
-        Sprite1 = pyglet.sprite.Sprite(Image, x=100,y=100, batch=ObjectBatch)
-        Sprite2 = pyglet.sprite.Sprite(Image, x=132,y=100, batch=ObjectBatch)
-        Sprite3 = pyglet.sprite.Sprite(Image, x=164,y=100, batch=ObjectBatch)
-        Sprite4 = pyglet.sprite.Sprite(Image, x=196,y=100, batch=ObjectBatch)
-        Sprite5 = pyglet.sprite.Sprite(Image, x=228,y=100, batch=ObjectBatch)
-        Sprite6 = pyglet.sprite.Sprite(Image, x=260,y=100, batch=ObjectBatch)
-        Sprite7 = pyglet.sprite.Sprite(Image, x=292,y=100, batch=ObjectBatch)
-        Sprite8 = pyglet.sprite.Sprite(Image, x=324,y=100, batch=ObjectBatch)
-        Sprite9 = pyglet.sprite.Sprite(Image, x=240,y=132, batch=ObjectBatch)
-        Sprite10 = pyglet.sprite.Sprite(Image, x=160,y=198, batch=ObjectBatch)
+Jump = False
 
-    # Block1Solid
-    def Block1Solid(obj1x,obj1y,obj2x,obj2y,obj1w,obj1h,obj2w,obj2h):
-        if collision.rectangle(obj1x,obj1y-2 ,obj2x,obj2y ,obj1w,obj1h ,obj2w,obj2h):
-            if KeyHandler[key.W]:
-                Objects.Player.OldPosY = Objects.Player.Sprite.y
-                Objects.Player.Jumping = True
-            Objects.Player.Sprite.y += Objects.Player.Gravity
-
-        if collision.rectangle(obj1x,obj1y ,obj2x-1,obj2y ,obj1w,obj1h ,obj2w+2,obj2h):
-            if Objects.Player.Direction == 'left': Objects.Player.Sprite.x += 4
-            if Objects.Player.Direction == 'right': Objects.Player.Sprite.x -= 4
-        if collision.rectangle(obj1x,obj1y ,obj2x+2,obj2y ,obj1w,obj1h+0.1 ,obj2w-5,obj2h-31):
-            Objects.Player.Sprite.y -= Objects.Player.Gravity
-            Objects.Player.Jumping = False
+def BlockSolid(BlockX, BlockY):
+    global Jump
+    if collision.rectangle(Player.x,Player.y ,BlockX+5,BlockY+30 ,32,32 ,22,2):
+        Player.y += 1
+        if KeyHandler[key.W]:
+            PlayerOldPosX = Player.y
+            Jump = True
+    if collision.rectangle(Player.x,Player.y+0.1 ,BlockX,BlockY ,32,32 ,32,2):
+        Jump = False
+    if collision.rectangle(Player.x,Player.y ,BlockX,BlockY+1 ,32,32 ,2,30):
+        Player.x -= 1
+    if collision.rectangle(Player.x,Player.y ,BlockX+30,BlockY+1 ,32,32 ,2,30):
+        Player.x += 1
 
 
-# draw objects
-@Window.event
+@Window.event()
 def on_draw():
     # Clears the window
     Window.clear()
-    # Draws the Objects in the batch
+    # Draws all of the objects in the Object Batch
     ObjectBatch.draw()
 
-# Update
 def Update(dt):
+    global Jump
+    # Gravity
+    Player.y -= 1
+    if KeyHandler[key.A]: Player.x -= 1
+    if KeyHandler[key.D]: Player.x += 1
+    BlockSolid(Block1.x,Block1.y)
+    BlockSolid(Block2.x,Block2.y)
+    BlockSolid(Block3.x,Block3.y)
+    BlockSolid(Block4.x,Block4.y)
+    BlockSolid(Block5.x,Block5.y)
+    BlockSolid(Block6.x,Block6.y)
+    BlockSolid(Block7.x,Block7.y)
+    BlockSolid(Block8.x,Block8.y)
 
-    # Turn Block1 solid
-    Objects.Block1Solid(Objects.Player.Sprite.x,Objects.Player.Sprite.y ,Objects.Block1.Sprite1.x,Objects.Block1.Sprite1.y, 32,32,32,32)
-    Objects.Block1Solid(Objects.Player.Sprite.x,Objects.Player.Sprite.y ,Objects.Block1.Sprite2.x,Objects.Block1.Sprite2.y, 32,32,32,32)
-    Objects.Block1Solid(Objects.Player.Sprite.x,Objects.Player.Sprite.y ,Objects.Block1.Sprite3.x,Objects.Block1.Sprite3.y, 32,32,32,32)
-    Objects.Block1Solid(Objects.Player.Sprite.x,Objects.Player.Sprite.y ,Objects.Block1.Sprite4.x,Objects.Block1.Sprite4.y, 32,32,32,32)
-    Objects.Block1Solid(Objects.Player.Sprite.x,Objects.Player.Sprite.y ,Objects.Block1.Sprite5.x,Objects.Block1.Sprite5.y, 32,32,32,32)
-    Objects.Block1Solid(Objects.Player.Sprite.x,Objects.Player.Sprite.y ,Objects.Block1.Sprite6.x,Objects.Block1.Sprite6.y, 32,32,32,32)
-    Objects.Block1Solid(Objects.Player.Sprite.x,Objects.Player.Sprite.y ,Objects.Block1.Sprite7.x,Objects.Block1.Sprite7.y, 32,32,32,32)
-    Objects.Block1Solid(Objects.Player.Sprite.x,Objects.Player.Sprite.y ,Objects.Block1.Sprite8.x,Objects.Block1.Sprite8.y, 32,32,32,32)
-    Objects.Block1Solid(Objects.Player.Sprite.x,Objects.Player.Sprite.y ,Objects.Block1.Sprite9.x,Objects.Block1.Sprite9.y, 32,32,32,32)
-    Objects.Block1Solid(Objects.Player.Sprite.x,Objects.Player.Sprite.y ,Objects.Block1.Sprite10.x,Objects.Block1.Sprite10.y, 32,32,32,32)
-
-    # Gravity for player
-    Objects.Player.Sprite.y -= Objects.Player.Gravity
-    # Movment
-    if KeyHandler[key.A]:
-        Objects.Player.Direction = 'left'
-        Objects.Player.Sprite.x -= 4
-    if KeyHandler[key.D]:
-        Objects.Player.Direction = 'right'
-        Objects.Player.Sprite.x += 4
-    if Objects.Player.Jumping == True:
-        Objects.Player.Sprite.y += Objects.Player.Gravity + 4
-        if Objects.Player.Sprite.y == Objects.Player.OldPosY + 70:
-            Objects.Player.Jumping = False
-
+    if Jump == True:
+        Player.y += 3
+        if Player.y >= PlayerOldPosX + 250: Jump = False
 
 pyglet.clock.schedule_interval(Update, 1/120)
 pyglet.app.run()
