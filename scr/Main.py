@@ -21,11 +21,8 @@ Block1 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=100,y=100,
 Block2 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=132,y=100, batch=ObjectBatch)
 Block3 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=164,y=100, batch=ObjectBatch)
 Block4 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=196,y=100, batch=ObjectBatch)
-Block5 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=168,y=196, batch=ObjectBatch)
-Block6 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=228,y=100, batch=ObjectBatch)
-Block7 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=260,y=100, batch=ObjectBatch)
-Block8 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=260,y=132, batch=ObjectBatch)
-
+Block5 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=132,y=132, batch=ObjectBatch)
+Block6 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=196,y=196, batch=ObjectBatch)
 Jump = False
 
 def BlockSolid(BlockX, BlockY):
@@ -62,9 +59,6 @@ def Update(dt):
     BlockSolid(Block4.x,Block4.y)
     BlockSolid(Block5.x,Block5.y)
     BlockSolid(Block6.x,Block6.y)
-    BlockSolid(Block7.x,Block7.y)
-    BlockSolid(Block8.x,Block8.y)
-
     if Jump == True:
         Player.y += 3
         if Player.y >= PlayerOldPosX + 250: Jump = False
