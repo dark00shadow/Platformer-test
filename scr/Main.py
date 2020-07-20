@@ -26,7 +26,7 @@ Block6 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=196,y=196,
 Jump = False
 
 def BlockSolid(BlockX, BlockY):
-    global Jump
+    global Jump, PlayerOldPosX
     if collision.rectangle(Player.x,Player.y ,BlockX+5,BlockY+30 ,32,32 ,22,2):
         Player.y += 1
         if KeyHandler[key.W]:
@@ -61,7 +61,7 @@ def Update(dt):
     BlockSolid(Block6.x,Block6.y)
     if Jump == True:
         Player.y += 3
-        if Player.y >= PlayerOldPosX + 250: Jump = False
+        if Player.y >= PlayerOldPosX + 70: Jump = False
 
 pyglet.clock.schedule_interval(Update, 1/120)
 pyglet.app.run()
