@@ -16,7 +16,7 @@ ObjectBatch = pyglet.graphics.Batch()
 
 # Objects
 Player = pyglet.sprite.Sprite(pyglet.image.load('32x32-dark_green.png') ,x=100,y=200, batch=ObjectBatch)
-PlayerOldPosX = 0
+PlayerOldPosY = 0
 Block1 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=100,y=100, batch=ObjectBatch)
 Block2 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=132,y=100, batch=ObjectBatch)
 Block3 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=164,y=100, batch=ObjectBatch)
@@ -26,11 +26,11 @@ Block6 = pyglet.sprite.Sprite(pyglet.image.load('32x32-white.png') ,x=196,y=196,
 Jump = False
 
 def BlockSolid(BlockX, BlockY):
-    global Jump, PlayerOldPosX
+    global Jump, PlayerOldPosY
     if collision.rectangle(Player.x,Player.y ,BlockX+5,BlockY+30 ,32,32 ,22,2):
         Player.y += 1
         if KeyHandler[key.W]:
-            PlayerOldPosX = Player.y
+            PlayerOldPosY = Player.y
             Jump = True
     if collision.rectangle(Player.x,Player.y+0.1 ,BlockX,BlockY ,32,32 ,32,2):
         Jump = False
@@ -61,7 +61,7 @@ def Update(dt):
     BlockSolid(Block6.x,Block6.y)
     if Jump == True:
         Player.y += 3
-        if Player.y >= PlayerOldPosX + 70: Jump = False
+        if Player.y >= PlayerOldPosY + 70: Jump = False
 
 pyglet.clock.schedule_interval(Update, 1/120)
 pyglet.app.run()
